@@ -1,12 +1,13 @@
     // Retrieve necessary elements from the DOM
-    const searchForm = document.getElementById("search-form");
-    const searchInput = document.getElementById("search-input");
-    const searchResults = document.getElementById("search-results");
+    document.addEventListener('DOMContentLoaded', () =>{
+    const form = document.getElementById("github-form");
+    const input = document.getElementById("search");
+    const githubContainer = document.getElementById("github-container");
 
     // Add event listener to the search form
-    searchForm.addEventListener("submit", function(event) {
+    form.addEventListener("submit", function(event) {
       event.preventDefault();
-      const query = searchInput.value.trim();
+      const query = input.value;
       if (query !== "") {
         searchUsers(query);
       }
@@ -19,7 +20,7 @@
       // Make a GET request to the GitHub API
       fetch(url, {
         headers: {
-          Accept: "application/vnd.github.v3+json"
+          "Accept": "application/vnd.github.v3+json"
         }
       })
       .then(response => response.json())
@@ -33,17 +34,17 @@
 
     // Function to display user search results
     function displayUsers(users) {
-      searchResults.innerHTML = "";
+      githubContainer.innerHTML = "";
 
       if (users.length > 0) {
         users.forEach(user => {
           const userItem = createUserItem(user); // Create a DOM element for each user
-          searchResults.appendChild(userItem); // Add the user element to the search results container
+          githubContainer.appendChild(userItem); // Add the user element to the search results container
         });
       } else {
         const noResultsMessage = document.createElement("p");
         noResultsMessage.textContent = "No results found.";
-        searchResults.appendChild(noResultsMessage);
+        githubContainer.appendChild(noResultsMessage);
       }
     }
 
@@ -77,12 +78,12 @@
 
     // Function to fetch user repositories
     function searchUserRepos(username) {
-      const url = `https://api.github.com/users/${username}/repos`;
+      let url = `https://api.github.com/users/${username}/repos`;
 
       // Make a GET request to the GitHub API
       fetch(url, {
         headers: {
-          Accept: "application/vnd.github.v3+json"
+          "Accept": "application/vnd.github.v3+json"
         }
       })
       .then(response => response.json())
@@ -96,17 +97,17 @@
 
     // Function to display user repositories
     function displayUserRepos(repos) {
-      searchResults.innerHTML = "";
+      githubContainer.innerHTML = "";
 
       if (repos.length > 0) {
         repos.forEach(repo => {
           const repoItem = createRepoItem(repo); // Create a DOM element for each repository
-          searchResults.appendChild(repoItem); // Add the repository element to the search results container
+          githubContainer.appendChild(repoItem); // Add the repository element to the search results container
         });
       } else {
         const noResultsMessage = document.createElement("p");
         noResultsMessage.textContent = "No repositories found.";
-        searchResults.appendChild(noResultsMessage);
+        githubContainer.appendChild(noResultsMessage);
       }
     }
 
@@ -126,4 +127,4 @@
 
       return repoItem;
     }
-    alert (console.log('hello'));
+})
