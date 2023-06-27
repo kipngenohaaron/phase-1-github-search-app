@@ -22,3 +22,9 @@ img{
  border-radius: 50%;
 }
 
+#github-form input[type=submit]  {
+  color: brown;
+  text-align: end;
+  border-radius: 5px;
+  background-color: rgb(131, 250, 131);
+}
