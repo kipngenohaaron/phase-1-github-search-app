@@ -1,8 +1,12 @@
+*{
+  background: rgb(113, 236, 244);
+}
 #main {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
+
 }
 
 #github-container {
@@ -12,3 +16,8 @@
 ul {
   list-style: none;
 }
+img{
+  width: 200px;
+  padding: 10px;
+}
+
